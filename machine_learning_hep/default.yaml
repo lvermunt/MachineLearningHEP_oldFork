@@ -2,41 +2,41 @@ activate_models:
   BinaryClassification:
     keras:
       keras_simple_one_layer_binary_classifier: false
-      keras_simple_two_layer_binary_classifier: true
+      keras_simple_two_layer_binary_classifier: false
     scikit:
-      scikit_adaboost_classifier: true
-      scikit_decision_tree_classifier: true
-      scikit_random_forest_classifier: true
+      scikit_adaboost_classifier: false
+      scikit_decision_tree_classifier: false
+      scikit_random_forest_classifier: false
     xgboost:
       xgboost_classifier: true
   Regression:
     scikit:
-      scikit_lasso_regression: true
-      scikit_linear_regression: true
-      scikit_ridge_regression: true
+      scikit_lasso_regression: false
+      scikit_linear_regression: false
+      scikit_ridge_regression: false
 applytodatamc: true
-binmax: 4
-binmin: 2
-case: Lc
+binmax: 2
+binmin: 4
+case: Dzero
 doROC: true
-doboundary: true
-docorrelation: false
+doboundary: false
+docorrelation: true
 docrossvalidation: true
 dogridsearch: false
 doimportance: true
 dolearningcurve: true
 dopca: false
 dopltregressionxy: false
-dosignifopt: false
+dosignifopt: true
 dostandard: false
 dotesting: true
 dotraining: true
 loadsampleoption: true
 mlsubtype: HFmeson
 mltype: BinaryClassification
-ncores: -1
-nevt_bkg: 1000
-nevt_sig: 1000
+ncores: 5
+nevt_bkg: 500000
+nevt_sig: 500000
 nkfolds: 5
 rnd_shuffle: 12
 rnd_splt: 12

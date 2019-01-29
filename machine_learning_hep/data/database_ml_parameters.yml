@@ -82,13 +82,15 @@ Dplus:
     bkg_data_fraction: 0.1 # fraction of real data used in the estimation
     num_steps: 101 # number of steps used in efficiency and signif. estimation
 Dzero:
-  sig_bkg_files: [data/inputroot/SmallSkimmed_Dzero_pp5TeV_MC_train307.root, data/inputroot/SmallSkimmed_Dzero_pp5TeV_train308.root]
-  data_mc_files: [data/inputroot/SmallSkimmed_Dzero_pp5TeV_train308.root, data/inputroot/SmallSkimmed_Dzero_pp5TeV_MC_train307.root]
+  sig_bkg_files: [../../../../data/HeavyFlavour/DmesonsLc_pp_5TeV/MC_LHC18a4a2/16-01-2019/307_20181220-1321/merged/child_3/fullchild3_AnalysisResults_Dzero_skimmed.root, ../../../../data/HeavyFlavour/DmesonsLc_pp_5TeV/Data_LHC17pq/16-01-2019/308_20181220-1321/merged/child_2/1-7-12-17child3_AnalysisResults_Dzero_skimmed_Merged100.root]
+  data_mc_files: [../../../../data/HeavyFlavour/DmesonsLc_pp_5TeV/Data_LHC17pq/16-01-2019/308_20181220-1321/merged/child_2/1-7-12-17child3_AnalysisResults_Dzero_skimmed_Merged100.root, ../../../../data/HeavyFlavour/DmesonsLc_pp_5TeV/MC_LHC18a4a2/16-01-2019/307_20181220-1321/merged/child_3/fullchild3_AnalysisResults_Dzero_skimmed.root]
+  #sig_bkg_files: [data/inputroot/SmallSkimmed_Dzero_pp5TeV_MC_train307.root, data/inputroot/SmallSkimmed_Dzero_pp5TeV_train308.root]
+  #data_mc_files: [data/inputroot/SmallSkimmed_Dzero_pp5TeV_train308.root, data/inputroot/SmallSkimmed_Dzero_pp5TeV_MC_train307.root]
   mass_cut: [1.77, 1.97]
   mass: 1.864
   pdg_code: null
   tree_name: fTreeDzeroFlagged
-  var_all: [d_len_ML, d_len_xy_ML, norm_dl_xy_ML, cos_p_ML, cos_p_xy_ML, imp_par_xy_ML, pt_prong0_ML, pt_prong1_ML, imp_par_prong0_ML, imp_par_prong1_ML, max_norm_d0d0exp_ML, inv_mass_ML, pt_cand_ML, signal_ML, cand_type_ML, y_cand_ML, eta_prong0_ML, eta_prong1_ML]
+  var_all: [d_len_ML, d_len_xy_ML, norm_dl_xy_ML, cos_p_ML, cos_p_xy_ML, imp_par_xy_ML, cos_t_star_ML, imp_par_prod_ML, pt_prong0_ML, pt_prong1_ML, imp_par_prong0_ML, imp_par_prong1_ML, max_norm_d0d0exp_ML, inv_mass_ML, pt_cand_ML, signal_ML, cand_type_ML, y_cand_ML, eta_prong0_ML, eta_prong1_ML]
   var_boundaries: [d_len_ML, max_norm_d0d0exp_ML]
   var_correlation:
   - [pt_cand_ML, d_len_xy_ML, d_len_ML, pt_cand_ML, pt_cand_ML, norm_dl_xy_ML, max_norm_d0d0exp_ML, cos_p_xy_ML, cos_p_xy_ML]
@@ -96,7 +98,7 @@ Dzero:
   var_others: [inv_mass_ML, pt_cand_ML]
   var_signal: signal_ML
   var_target: signal_ML
-  var_training: [d_len_ML, d_len_xy_ML, norm_dl_xy_ML, cos_p_ML, cos_p_xy_ML, imp_par_xy_ML, pt_prong0_ML, pt_prong1_ML, imp_par_prong0_ML, imp_par_prong1_ML, max_norm_d0d0exp_ML]
+  var_training: [d_len_ML, d_len_xy_ML, norm_dl_xy_ML, cos_p_ML, cos_p_xy_ML, imp_par_xy_ML, cos_t_star_ML, imp_par_prod_ML, pt_prong0_ML, pt_prong1_ML, imp_par_prong0_ML, imp_par_prong1_ML, max_norm_d0d0exp_ML]
   var_cand_type: cand_type_ML # name where bitmap is stored
   var_cand_type_gen: cand_type_gen_ML # name where generated bitmap is stored
   sel_signal_map: 0b00000010 # BIT(1) is signal
