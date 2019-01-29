@@ -18,6 +18,7 @@ Methods to: study selection efficiency and expected significance
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import pickle as pl
 from ROOT import TH1F, TF1, gROOT  # pylint: disable=import-error,no-name-in-module
 from machine_learning_hep.logger import get_logger
 from machine_learning_hep.general import getdataframe, filterdataframe_singlevar
@@ -161,16 +162,18 @@ def plot_fonll(filename, fonll_pred, frag_frac, part_label, suffix, plot_dir):
     Plot the FONLL prediction for the current particle.
     """
     df = pd.read_csv(filename)
-    plt.figure(figsize=(20, 15))
+    figure = plt.figure(figsize=(20, 15))
     plt.subplot(111)
     plt.plot(df['pt'], df[fonll_pred] * frag_frac, linewidth=4.0)
     plt.xlabel('P_t [GeV/c]', fontsize=20)
     plt.ylabel('Cross Section [pb/GeV]', fontsize=20)
     plt.title("FONLL cross section " + part_label, fontsize=20)
     plt.semilogy()
-    plot_name = plot_dir + '/FONLL curve %s.png' % (suffix)
+    plot_name = plot_dir + '/FONLLcurve%s.png' % (suffix)
     plt.savefig(plot_name)
-
+    plotnamepickle = plot_dir + '/FONLLcurve%s.pickle' % (suffix)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure, fid)
 
 def calc_eff_acc(df_mc_gen, df_mc_reco, sel_signal_map, sel_signal_map_rej,
                  var_cand_type, var_cand_type_gen):
@@ -300,7 +303,13 @@ def study_signif(case, names, bin_lim, file_mc, file_data, df_mc_reco, df_ml_tes
     plt.figure(fig_eff.number)
     plt.legend(loc="lower left", prop={'size': 18})
     plt.savefig(plotdir + '/Efficiency%sSignal.png' % suffix)
+    plotnamepickle = plotdir + '/Efficiency%sSignal.pickle' % (suffix)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(fig_eff, fid)
 
     plt.figure(fig_signif.number)
     plt.legend(loc="lower left", prop={'size': 18})
     plt.savefig(plotdir + '/Significance%s.png' % suffix)
+    plotnamepickle = plotdir + '/Significance%s.pickle' % (suffix)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(fig_signif, fid)
