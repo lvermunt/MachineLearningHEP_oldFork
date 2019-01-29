@@ -97,7 +97,11 @@ Dzero:
   var_signal: signal_ML
   var_target: signal_ML
   var_training: [d_len_ML, d_len_xy_ML, norm_dl_xy_ML, cos_p_ML, cos_p_xy_ML, imp_par_xy_ML, pt_prong0_ML, pt_prong1_ML, imp_par_prong0_ML, imp_par_prong1_ML, max_norm_d0d0exp_ML]
-  sel_signal: cand_type_ML==10 or cand_type_ML==11 or cand_type_ML==18 or cand_type_ML==19
+  var_cand_type: cand_type_ML # name where bitmap is stored
+  var_cand_type_gen: cand_type_gen_ML # name where generated bitmap is stored
+  sel_signal_map: 0b00000010 # BIT(1) is signal
+  sel_signal_map_rej: 0b00100000 # BIT(5) is reflections
+  sel_signal_map_std: 0b00000001 # BIT(0) is when selected std analysis
   sel_bkg: inv_mass_ML<1.77 or inv_mass_ML>1.97
   var_binning: pt_cand_ML
   presel_reco: abs(eta_prong0_ML)<0.8 and abs(eta_prong1_ML)<0.8
@@ -105,12 +109,7 @@ Dzero:
   var_gen: [y_cand_gen_ML, pt_cand_gen_ML, cand_type_gen_ML, z_vtx_gen_ML]
   presel_gen: abs(y_cand_gen_ML) < 0.5 and abs(z_vtx_gen_ML) < 10 # pre-selections on generated candidates
   ptgen: pt_cand_gen_ML
-  sel_signal_gen: cand_type_gen_ML==10 or cand_type_gen_ML==11 or cand_type_gen_ML==18 or cand_type_gen_ML==19
   signif_opt:
-    sel_signal_reco_sopt: cand_type_ML==10 or cand_type_ML==11 or cand_type_ML==18 or cand_type_ML==19 # define signal candidates
-    sel_signal_gen_sopt: cand_type_gen_ML==10 or cand_type_gen_ML==11 or cand_type_gen_ML==18 or cand_type_gen_ML==19
-    sel_signal_reco_std: cand_type_ML==11 or cand_type_ML==19 # define signal candidates + selected std
-    sel_signal_gen_std: cand_type_gen_ML==11 or cand_type_gen_ML==19
     treename_event: fTreeEventChar # variables related to the event tree
     var_event: [is_ev_rej_ML]
     sel_event: is_ev_rej_ML==0
