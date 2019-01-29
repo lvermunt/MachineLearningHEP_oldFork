@@ -23,9 +23,11 @@ from machine_learning_hep.correlations import vardistplot, scatterplot, correlat
 from machine_learning_hep.logger import get_logger
 
 
-def create_mlsamples(df_sig, df_bkg, sel_signal, sel_bkg, rnd_shuffle,  # pylint: disable=too-many-arguments
-                     var_signal, var_training, nevt_sig, nevt_bkg, test_frac, rnd_splt):
-    df_sig = df_sig.query(sel_signal)
+def create_mlsamples(df_sig, df_bkg, sel_signal_map, sel_signal_map_rej, var_cand_type,
+                     sel_bkg, rnd_shuffle, var_signal, var_training, nevt_sig, nevt_bkg,
+                     test_frac, rnd_splt):
+    sel_map = sel_signal_map + sel_signal_map_rej
+    df_sig = df_sig.loc[lambda df_sig: (df_sig[var_cand_type] & sel_map == sel_signal_map)]
     df_bkg = df_bkg.query(sel_bkg)
     df_sig = shuffle(df_sig, random_state=rnd_shuffle)
     df_bkg = shuffle(df_bkg, random_state=rnd_shuffle)

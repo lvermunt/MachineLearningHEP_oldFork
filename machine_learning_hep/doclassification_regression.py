@@ -86,7 +86,9 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     trename = data[case]["tree_name"]
     var_all = data[case]["var_all"]
     var_signal = data[case]["var_signal"]
-    sel_signal = data[case]["sel_signal"]
+    var_cand_type = data[case]["var_cand_type"]
+    sel_signal_map = data[case]['sel_signal_map']
+    sel_signal_map_rej = data[case]['sel_signal_map_rej']
     sel_bkg = data[case]["sel_bkg"]
     var_training = data[case]["var_training"]
     var_target = data[case]["var_target"]
@@ -129,6 +131,8 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     if loadsampleoption == 1:
         df_sig = getdataframe(filesig, trename, var_all)
         df_bkg = getdataframe(filebkg, trename, var_all)
+        df_sig[var_cand_type] = df_sig[var_cand_type].astype(int)
+        df_bkg[var_cand_type] = df_bkg[var_cand_type].astype(int)
         if presel_reco is not None:
             df_sig = df_sig.query(presel_reco)
             df_bkg = df_bkg.query(presel_reco)
@@ -136,9 +140,9 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
         df_bkg = filterdataframe_singlevar(df_bkg, var_binning, binmin, binmax)
         _, df_ml_test, df_sig_train, df_bkg_train, _, _, \
         x_train, y_train, x_test, y_test = \
-            create_mlsamples(df_sig, df_bkg, sel_signal, sel_bkg, rnd_shuffle,
-                             var_signal, var_training,
-                             nevt_sig, nevt_bkg, test_frac, rnd_splt)
+            create_mlsamples(df_sig, df_bkg, sel_signal_map, sel_signal_map_rej,
+                             var_cand_type, sel_bkg, rnd_shuffle, var_signal,
+                             var_training, nevt_sig, nevt_bkg, test_frac, rnd_splt)
 
     if docorrelation == 1:
         do_correlation(df_sig_train, df_bkg_train, var_all, var_corr_x, var_corr_y, plotdir)
@@ -178,6 +182,8 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     if applytodatamc == 1:
         df_data = getdataframe(filedata, trename, var_all)
         df_mc = getdataframe(filemc, trename, var_all)
+        df_data[var_cand_type] = df_data[var_cand_type].astype(int)
+        df_mc[var_cand_type] = df_mc[var_cand_type].astype(int)
         if presel_reco is not None:
             df_mc = df_mc.query(presel_reco)
             df_data = df_data.query(presel_reco)
