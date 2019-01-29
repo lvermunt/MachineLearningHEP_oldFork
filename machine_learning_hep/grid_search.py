@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier, AdaBoostClassifier  # pylint: disable=unused-import
 from machine_learning_hep.logger import get_logger
+import pickle as pl
 
 
 def do_gridsearch(names, classifiers, param_grid, refit_arr, x_train, y_train_, cv_, ncores):
@@ -113,6 +114,9 @@ def perform_plot_gridsearch(names, scores, par_grid, keys, changeparameter, outp
         pad.legend(fontsize=10)
     plotname = output_ + "/GridSearchResults" + suffix_ + ".png"
     plt.savefig(plotname)
+    plotnamepickle = output_ + "/GridSearchResults" + suffix_ + ".pickle"
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(fig, fid)
     img_gridsearch = BytesIO()
     plt.savefig(img_gridsearch, format='png')
     img_gridsearch.seek(0)

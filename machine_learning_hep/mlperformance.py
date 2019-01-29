@@ -24,6 +24,7 @@ from sklearn.model_selection import cross_val_score, cross_val_predict, \
     train_test_split, StratifiedKFold
 from sklearn.metrics import roc_curve, auc, confusion_matrix, precision_recall_curve, \
     mean_squared_error
+import pickle as pl
 
 
 def cross_validation_mse(names_, classifiers_, x_train, y_train, cv_, ncores):
@@ -68,6 +69,9 @@ def plot_cross_validation_mse(names_, df_scores_, suffix_, folder):
         i += 1
     plotname = folder+'/scoresRME%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/scoresRME%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     img_scoresRME = BytesIO()
     plt.savefig(img_scoresRME, format='png')
     img_scoresRME.seek(0)
@@ -90,6 +94,9 @@ def plotdistributiontarget(names_, testset, myvariablesy, suffix_, folder):
         i += 1
     plt.legend(loc="center right")
     plotname = folder+'/distributionregression%s.png' % (suffix_)
+    plotnamepickle = folder+'/distributionregression%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     plt.savefig(plotname)
     img_dist_reg = BytesIO()
     plt.savefig(img_dist_reg, format='png')
@@ -112,6 +119,9 @@ def plotscattertarget(names_, testset, myvariablesy, suffix_, folder):
         i += 1
     plotname = folder+'/scatterplotregression%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/scatterplotregression%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(_, fid)
     img_scatt_reg = BytesIO()
     plt.savefig(img_scatt_reg, format='png')
     img_scatt_reg.seek(0)
@@ -142,6 +152,9 @@ def confusion(names_, classifiers_, suffix_, x_train, y_train, cvgen, folder):
         i += 1
     plotname = folder+'/confusion_matrix%s_Diag0.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/confusion_matrix%s_Diag0.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     img_confmatrix_dg0 = BytesIO()
     plt.savefig(img_confmatrix_dg0, format='png')
     img_confmatrix_dg0.seek(0)
@@ -168,6 +181,9 @@ def confusion(names_, classifiers_, suffix_, x_train, y_train, cvgen, folder):
         i += 1
     plotname = folder+'/confusion_matrix%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/confusion_matrix%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure2, fid)
     img_confmatrix = BytesIO()
     plt.savefig(img_confmatrix, format='png')
     img_confmatrix.seek(0)
@@ -193,6 +209,9 @@ def precision_recall(names_, classifiers_, suffix_, x_train, y_train, cvgen, fol
         i += 1
     plotname = folder+'/precision_recall%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/precision_recall%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     img_precision_recall = BytesIO()
     plt.savefig(img_precision_recall, format='png')
     img_precision_recall.seek(0)
@@ -216,6 +235,9 @@ def precision_recall(names_, classifiers_, suffix_, x_train, y_train, cvgen, fol
         i += 1
     plotname = folder+'/ROCcurve%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/ROCcurve%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure2, fid)
     img_roc = BytesIO()
     plt.savefig(img_roc, format='png')
     img_roc.seek(0)
@@ -252,6 +274,9 @@ def plot_learning_curves(names_, classifiers_, suffix_, folder, x_data, y_data, 
         i += 1
     plotname = folder+'/learning_curve%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/learning_curve%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     img_learn = BytesIO()
     plt.savefig(img_learn, format='png')
     img_learn.seek(0)

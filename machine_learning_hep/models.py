@@ -23,6 +23,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+import pickle as pl
 
 from sklearn.feature_extraction import DictVectorizer
 
@@ -178,7 +179,7 @@ def readmodels(names_, folder_, suffix_):
 
 
 def importanceplotall(mylistvariables_, names_, trainedmodels_, suffix_, folder):
-    plt.figure(figsize=(25, 15))
+    figure1 = plt.figure(figsize=(25, 15))
     plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.4, hspace=0.2)
 
     i = 1
@@ -203,6 +204,9 @@ def importanceplotall(mylistvariables_, names_, trainedmodels_, suffix_, folder)
     plt.subplots_adjust(wspace=0.5)
     plotname = folder+'/importanceplotall%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/importanceplotall%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure1, fid)
     img_import = BytesIO()
     plt.savefig(img_import, format='png')
     img_import.seek(0)
@@ -251,6 +255,9 @@ def decisionboundaries(names_, trainedmodels_, suffix_, x_train_, y_train_, fold
         i += 1
     plotname = folder+'/decisionboundaries%s.png' % (suffix_)
     plt.savefig(plotname)
+    plotnamepickle = folder+'/decisionboundaries%s.pickle' % (suffix_)
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure, fid)
     img_boundary = BytesIO()
     plt.savefig(img_boundary, format='png')
     img_boundary.seek(0)

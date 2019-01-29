@@ -19,6 +19,7 @@ from io import BytesIO
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pickle as pl
 
 
 def vardistplot(dataframe_sig_, dataframe_bkg_, mylistvariables_, output_):
@@ -36,6 +37,9 @@ def vardistplot(dataframe_sig_, dataframe_bkg_, mylistvariables_, output_):
         i = i+1
     plotname = output_+'/variablesDistribution.png'
     plt.savefig(plotname, bbox_inches='tight')
+    plotnamepickle = output_+'/variablesDistribution.pickle'
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figure, fid)
     imagebytesIO = BytesIO()
     plt.savefig(imagebytesIO, format='png')
     imagebytesIO.seek(0)
@@ -64,6 +68,9 @@ def scatterplot(dataframe_sig_, dataframe_bkg_, mylistvariablesx_, mylistvariabl
         i = i+1
     plotname = output_+'/variablesScatterPlot.png'
     plt.savefig(plotname, bbox_inches='tight')
+    plotnamepickle = output_+'/variablesScatterPlot.pickle'
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(figurecorr, fid)
     imagebytesIO = BytesIO()
     plt.savefig(imagebytesIO, format='png')
     imagebytesIO.seek(0)
@@ -80,6 +87,9 @@ def correlationmatrix(dataframe, output_, label):
         square=True, ax=ax)
     plotname = output_+'/correlationmatrix'+label+'.png'
     plt.savefig(plotname, bbox_inches='tight')
+    plotnamepickle = output_+'/correlationmatrix'+label+'.pickle'
+    with open(plotnamepickle, 'wb') as fid:
+        pl.dump(f, fid)
     imagebytesIO = BytesIO()
     plt.savefig(imagebytesIO, format='png')
     imagebytesIO.seek(0)
