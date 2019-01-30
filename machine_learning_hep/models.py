@@ -94,6 +94,7 @@ def getclf_keras(model_config, length_input):
     classifiers = []
     names = []
 
+<<<<<<< HEAD
     for c in model_config["keras"]:
         try:
             classifiers.append(KerasClassifier(build_fn=lambda name=c: \
