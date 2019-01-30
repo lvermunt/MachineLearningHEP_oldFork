@@ -15,8 +15,8 @@ activate_models:
       scikit_linear_regression: false
       scikit_ridge_regression: false
 applytodatamc: true
-binmax: 2
-binmin: 4
+binmax: 4
+binmin: 2
 case: Dzero
 doROC: true
 doboundary: false
