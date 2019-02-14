@@ -33,6 +33,7 @@ import machine_learning_hep.templates_keras as templates_keras
 import machine_learning_hep.templates_xgboost as templates_xgboost
 import machine_learning_hep.templates_scikit as templates_scikit
 
+pd.options.mode.chained_assignment = None
 
 def getclf_scikit(model_config):
 
