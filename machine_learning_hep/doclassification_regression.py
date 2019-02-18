@@ -96,6 +96,7 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     var_boundaries = data[case]["var_boundaries"]
     var_binning = data[case]['var_binning']
     presel_reco = data[case]["presel_reco"]
+    presel_reco_bitmap = data[case]["presel_reco_bitmap"]
 
     summary_string = f"#sig events: {nevt_sig}\n#bkg events: {nevt_bkg}\nmltype: {mltype}\n" \
                      f"mlsubtype: {mlsubtype}\ncase: {case}"
@@ -134,6 +135,11 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
         if presel_reco is not None:
             df_sig = df_sig.query(presel_reco)
             df_bkg = df_bkg.query(presel_reco)
+        if presel_reco_bitmap is not None:
+            df_sig = df_sig.loc[lambda df_sig: \
+                     (df_sig[var_cand_type] & presel_reco_bitmap == presel_reco_bitmap)]
+            df_bkg = df_bkg.loc[lambda df_bkg: \
+                     (df_bkg[var_cand_type] & presel_reco_bitmap == presel_reco_bitmap)]
         df_sig = filterdataframe_singlevar(df_sig, var_binning, binmin, binmax)
         df_bkg = filterdataframe_singlevar(df_bkg, var_binning, binmin, binmax)
         _, df_ml_test, df_sig_train, df_bkg_train, _, _, \
@@ -183,6 +189,11 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
         if presel_reco is not None:
             df_mc = df_mc.query(presel_reco)
             df_data = df_data.query(presel_reco)
+        if presel_reco_bitmap is not None:
+            df_mc = df_mc.loc[lambda df_mc: \
+                     (df_mc[var_cand_type] & presel_reco_bitmap == presel_reco_bitmap)]
+            df_data = df_data.loc[lambda df_data: \
+                     (df_data[var_cand_type] & presel_reco_bitmap == presel_reco_bitmap)]
         df_data = filterdataframe_singlevar(df_data, var_binning, binmin, binmax)
         df_mc = filterdataframe_singlevar(df_mc, var_binning, binmin, binmax)
         # The model predictions are added to the dataframes of data and MC
