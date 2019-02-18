@@ -232,7 +232,6 @@ def study_signif(case, names, bin_lim, file_mc, file_data, df_mc_reco, df_ml_tes
     bkg_fract = sopt_dict['bkg_data_fraction']
 
     df_mc_gen = getdataframe(file_mc, gen_dict['treename_gen'], gen_dict['var_gen'])
-    df_mc_gen[gen_dict['var_cand_type_gen']] = df_mc_gen[gen_dict['var_cand_type_gen']].astype(int)
     df_mc_gen = df_mc_gen.query(gen_dict['presel_gen'])
     df_mc_gen = filterdataframe_singlevar(df_mc_gen, gen_dict['ptgen'], bin_lim[0], bin_lim[1])
     df_evt = getdataframe(file_data, sopt_dict['treename_event'], sopt_dict['var_event'])

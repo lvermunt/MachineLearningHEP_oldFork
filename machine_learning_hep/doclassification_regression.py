@@ -131,8 +131,6 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     if loadsampleoption == 1:
         df_sig = getdataframe(filesig, trename, var_all)
         df_bkg = getdataframe(filebkg, trename, var_all)
-        df_sig[var_cand_type] = df_sig[var_cand_type].astype(int)
-        df_bkg[var_cand_type] = df_bkg[var_cand_type].astype(int)
         if presel_reco is not None:
             df_sig = df_sig.query(presel_reco)
             df_bkg = df_bkg.query(presel_reco)
@@ -182,8 +180,6 @@ def doclassification_regression(conf):  # pylint: disable=too-many-locals, too-m
     if applytodatamc == 1:
         df_data = getdataframe(filedata, trename, var_all)
         df_mc = getdataframe(filemc, trename, var_all)
-        df_data[var_cand_type] = df_data[var_cand_type].astype(int)
-        df_mc[var_cand_type] = df_mc[var_cand_type].astype(int)
         if presel_reco is not None:
             df_mc = df_mc.query(presel_reco)
             df_data = df_data.query(presel_reco)
